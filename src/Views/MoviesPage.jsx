@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Button from '../Components/Button/Button';
 import { apiQuerySearching } from '../services/api/apiMovies';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
-import LoaderExampleInlineCentered from '../Components/Loader/Loader';
+import Spiner from '../Components/Loader/Loader';
 import Searchbar from '../Components/Searchbar';
+import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 
 const Status = {
   IDLE: 'idle',
@@ -107,7 +108,9 @@ function MoviesPage() {
           )}
         </ul>
       )}
-      {status === Status.PENDING && <LoaderExampleInlineCentered />}
+
+      {status === Status.RESOLVED && moviesCollection && <ScrollUpButton />}
+      {status === Status.PENDING && <Spiner />}
       {status === Status.RESOLVED && moviesCollection.length > 19 && (
         <Button onLoadMoreBtnClick={onLoadMoreBtnClick} status={status} />
       )}
