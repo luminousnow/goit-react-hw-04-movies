@@ -2,22 +2,22 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = '75eda82d692cd448b965956ce8ebf68c';
 
 //АРІ запит - Список трендів
-export function apiTrending() {
-  return fetch(`${BASE_URL}trending/all/day?api_key=${API_KEY}`).then(
-    response => {
-      if (response.ok) {
-        return response.json();
-      }
+export function apiTrending(page) {
+  return fetch(
+    `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${page}`,
+  ).then(response => {
+    if (response.ok) {
+      return response.json();
+    }
 
-      return Promise.reject(new Error(`Хмм... Популярних фільмів не знайдено`));
-    },
-  );
+    return Promise.reject(new Error(`Хмм... Популярних фільмів не знайдено`));
+  });
 }
 
 //АРІ запит - Пошук фільмів по ключовому слову
-export function apiQuerySearching(query) {
+export function apiQuerySearching(query, page) {
   return fetch(
-    `${BASE_URL}search/movie?api_key=${API_KEY}&query=${query}`,
+    `${BASE_URL}search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
   ).then(response => {
     if (response.ok) {
       return response.json();

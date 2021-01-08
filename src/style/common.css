@@ -1,3 +1,6 @@
+/*
+ * Загальні стилі
+ */
 h1,
 h2,
 h3,
@@ -9,7 +12,8 @@ h5 {
 img {
   display: block;
   max-width: 100%;
-  height: auto;
+  /* height: auto; */
+  object-fit: cover;
 }
 
 ul {
@@ -20,4 +24,92 @@ ul {
 
 p {
   margin: 0;
+}
+
+/*
+ * Стили Gallery
+ */
+a.gallerylink:active, /* активная/посещенная ссылка */
+a.gallerylink:hover,  /* при наведении */
+a.gallerylink {
+  text-decoration: none;
+  color: #000000;
+}
+
+.gallery {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-top: 0;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  max-width: calc(100vw - 48px);
+
+  list-style: none;
+}
+
+.galleryItem {
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  transition: all 500ms;
+}
+
+.galleryItem:hover,
+.galleryItem:focus {
+  box-shadow: 0px 5px 30px 0px rgba(0, 145, 255, 0.774);
+  transform: scale(1.01);
+}
+
+.galleryTitle {
+  margin-top: 4px;
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+  padding: px 10px; /* Поля вокруг текста */
+  font-size: large;
+}
+
+.galleryVote {
+  font-size: large;
+  font-weight: 700;
+  padding: 4px 0px; /* Поля вокруг текста */
+}
+
+.galleryOverview {
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  background: #fc0; /* Цвет фона */
+  padding: 5px 20px; /* Поля вокруг текста */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+/*
+ * Стиль кнопки Повернутися
+ */
+.btn {
+  display: inline-block; /* Строчно-блочный элемент */
+  background: #8c959d; /* Серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  padding: 1rem 1.5rem; /* Поля вокруг текста */
+  text-decoration: none; /* Убираем подчёркивание */
+  border-radius: 3px; /* Скругляем уголки */
+}
+
+/*
+ * Стиль статусів запитів
+ */
+.idle,
+.pending,
+.resolved,
+.rejected {
+  text-align: center;
 }
