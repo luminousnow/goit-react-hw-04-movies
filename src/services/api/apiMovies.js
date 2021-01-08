@@ -28,7 +28,6 @@ export function apiQuerySearching(query, page) {
 }
 
 //АРІ запит - Деталі одного фільму
-// movie/89844?api_key=75eda82d692cd448b965956ce8ebf68c
 export function apiMovieDetails(movieId) {
   return fetch(`${BASE_URL}movie/${movieId}?api_key=${API_KEY}`).then(
     response => {

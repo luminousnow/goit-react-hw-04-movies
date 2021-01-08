@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useRouteMatch, useLocation, useHistory } from 'react-router-dom';
+import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import Button from '../Components/Button/Button';
-import { apiQuerySearching } from '../services/api/apiMovies';
-import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import Spiner from '../Components/Loader/Loader';
 import Searchbar from '../Components/Searchbar';
-import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
+import { apiQuerySearching } from '../services/api/apiMovies';
 
 const Status = {
   IDLE: 'idle',
@@ -20,17 +20,21 @@ function MoviesPage() {
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
-  const location = useLocation();
   const { url } = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
+
+  const searchQuery =
+    new URLSearchParams(location.search).get('query') ?? query;
 
   useEffect(() => {
-    if (!query) {
+    if (!searchQuery) {
       return;
     }
 
     setStatus(Status.PENDING);
 
-    apiQuerySearching(query, page)
+    apiQuerySearching(searchQuery, page)
       .then(collection => {
         setMoviesCollection(prevState => [...prevState, ...collection.results]);
 
@@ -48,7 +52,7 @@ function MoviesPage() {
 
         setStatus(Status.REJECTED);
       });
-  }, [page, query]);
+  }, [page, searchQuery]);
 
   const getQuery = query => {
     setQuery(query);
@@ -59,13 +63,21 @@ function MoviesPage() {
     setMoviesCollection([]);
   };
 
+  const onSearchHandlerChange = query => {
+    history.push({ ...location, search: `query=${query}` });
+  };
+
   const onLoadMoreBtnClick = () => {
     setPage(prevState => prevState + 1);
   };
 
   return (
     <div>
-      <Searchbar getQuery={getQuery} resetState={resetState} />
+      <Searchbar
+        getQuery={getQuery}
+        resetState={resetState}
+        onSearchHandlerChange={onSearchHandlerChange}
+      />
       {status === Status.IDLE && (
         <div className="idle">Напиши назву і запусти пошук!✨</div>
       )}

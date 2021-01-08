@@ -4,7 +4,7 @@ import { func } from 'prop-types';
 import { toast } from 'react-toastify';
 import { Form, Input } from 'semantic-ui-react';
 
-function Searchbar({ getQuery, resetState }) {
+function Searchbar({ getQuery, resetState, onSearchHandlerChange }) {
   const [query, setQuery] = useState('');
 
   const onSubmitButtonPressed = evt => {
@@ -28,6 +28,7 @@ function Searchbar({ getQuery, resetState }) {
 
     // передає поточний запит
     getQuery(query);
+    onSearchHandlerChange(query);
   };
 
   // слухає Input та оновлює значення query Стейту
