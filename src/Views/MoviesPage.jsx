@@ -5,6 +5,7 @@ import Button from '../Components/Button/Button';
 import Spiner from '../Components/Loader/Loader';
 import Searchbar from '../Components/Searchbar';
 import { apiQuerySearching } from '../services/api/apiMovies';
+import placeholder from '../img/film-placeholder.jpg';
 
 const Status = {
   IDLE: 'idle',
@@ -99,21 +100,29 @@ function MoviesPage() {
                   to={{
                     pathname: `${url}/${id}`,
                     state: {
-                      from: { location, lable: 'back to Movies' },
+                      from: { location, lable: 'go back' },
                     },
                   }}
                   className="gallerylink"
                 >
                   <img
-                    data-src={`https://www.themoviedb.org/t/p/w1280${poster_path}`}
+                    data-src={
+                      poster_path
+                        ? `https://www.themoviedb.org/t/p/w500${poster_path}`
+                        : placeholder
+                    }
                     alt={title}
                     height={480}
                     width={320}
                     className="lazyload"
                   />
-                  <h1 className="galleryTitle">{title}</h1>
-                  <p className="galleryVote">{vote_average}</p>
-                  {overview && <p className="galleryOverview">{overview}</p>}
+                  <h1 className="galleryTitle">
+                    {title ? title : 'Title is comming...'}
+                  </h1>
+                  <p className="galleryVote">{vote_average * 10 + '%'}</p>
+                  <p className="galleryOverview">
+                    {overview ? overview : 'overview is comming soon'}
+                  </p>
                 </Link>
               </li>
             ),

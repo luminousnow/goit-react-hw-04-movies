@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../Components/Button/Button';
 import { apiTrending } from '../services/api/apiMovies';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Spiner from '../Components/Loader/Loader';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
+import placeholder from '../img/film-placeholder.jpg';
 
 const Status = {
   IDLE: 'idle',
@@ -18,6 +19,7 @@ function HomePage() {
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
+  const location = useLocation();
 
   useEffect(() => {
     if (!moviesCollection) {
@@ -64,17 +66,33 @@ function HomePage() {
                 overview={overview}
                 className="galleryItem"
               >
-                <Link to={`/${id}`} className="gallerylink">
+                <Link
+                  to={{
+                    pathname: `movies/${id}`,
+                    state: {
+                      from: { location, lable: 'go back' },
+                    },
+                  }}
+                  className="gallerylink"
+                >
                   <img
-                    data-src={`https://www.themoviedb.org/t/p/w1280${poster_path}`}
+                    data-src={
+                      poster_path
+                        ? `https://www.themoviedb.org/t/p/w500${poster_path}`
+                        : placeholder
+                    }
                     alt={title}
                     height={480}
                     width={320}
                     className="lazyload"
                   />
-                  <h1 className="galleryTitle">{title}</h1>
-                  <p className="galleryVote">{vote_average}</p>
-                  {overview && <p className="galleryOverview">{overview}</p>}
+                  <h1 className="galleryTitle">
+                    {title ? title : 'Title is comming...'}
+                  </h1>
+                  <p className="galleryVote">{vote_average * 10 + '%'}</p>
+                  <p className="galleryOverview">
+                    {overview ? overview : 'overview is comming soon'}
+                  </p>
                 </Link>
               </li>
             ),
