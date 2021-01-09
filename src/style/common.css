@@ -140,6 +140,7 @@ a.gallerylink {
 
 .description {
   margin-bottom: 60px;
+  text-align: justify;
 }
 
 .description > h1 {
