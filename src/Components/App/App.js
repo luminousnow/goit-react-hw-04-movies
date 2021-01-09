@@ -1,12 +1,4 @@
-import {
-  apiTrending,
-  apiQuerySearching,
-  apiMovieDetails,
-  apiCast,
-  apiReviews,
-} from '../../services/api/apiMovies';
-
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import NotFoundPage from '../../Views/NotFoundPage';
 import HomePage from '../../Views/HomePage';
 import { Container } from 'semantic-ui-react';
@@ -16,10 +8,6 @@ import MoviesPage from '../../Views/MoviesPage';
 import MovieDetailsPage from '../../Views/MovieDetailsPage';
 
 function App() {
-  // apiQuerySearching('cat');
-  // apiMovieDetails(464052);
-  // apiCast(464052);
-  // apiReviews(464052);
   return (
     <Container>
       <Appbar />
@@ -28,15 +16,11 @@ function App() {
           <HomePage />
         </Route>
 
-        {/* <Route path="/:moviesId">
-          <MovieDetailsPage />
-        </Route> */}
-
         <Route path="/movies" exact>
           <MoviesPage />
         </Route>
 
-        <Route path="/movies/:moviesId">
+        <Route path="/movies/:movieId">
           <MovieDetailsPage />
         </Route>
 
