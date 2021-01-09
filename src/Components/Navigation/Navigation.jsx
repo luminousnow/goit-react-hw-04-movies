@@ -16,6 +16,7 @@ function Navigation() {
           Home
         </NavLink>
       </Menu.Item>
+
       <Menu.Item>
         <NavLink
           to="/movies"
