@@ -232,3 +232,11 @@ p.movieDetails {
   font-style: italic;
   color: gray;
 }
+
+/* 
+*  Стилі Cast
+*/
+
+.authorInfo {
+  /* display: flex; */
+}
