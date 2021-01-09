@@ -1,7 +1,7 @@
 function NotFoundPage() {
   return (
     <>
-      <a href="/" class="btn">
+      <a href="/home" class="btn">
         Повернутися
       </a>
       <div>
