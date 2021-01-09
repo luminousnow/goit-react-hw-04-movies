@@ -22,8 +22,8 @@ function Reviews({ movieId }) {
     setStatus(Status.PENDING);
 
     apiReviews(movieId)
-      .then(collection => {
-        setReviews(collection);
+      .then(({ results }) => {
+        setReviews(results);
         setStatus(Status.RESOLVED);
       })
       .catch(error => {
@@ -35,21 +35,14 @@ function Reviews({ movieId }) {
   return (
     <div>
       {status === Status.RESOLVED &&
-        reviews.results === 0 &&
+        reviews.length === 0 &&
         `We don't have any reviews for this movie`}
 
-      {status === Status.RESOLVED && reviews.results && (
+      {status === Status.RESOLVED && reviews && (
         <ul className="reviewsList">
-          {reviews.results.map(
+          {reviews.map(
             ({ id, author, author_details, content, created_at }) => (
-              <li
-                key={id}
-                author={author}
-                rating={author_details.rating}
-                content={content}
-                created_at={created_at}
-                className="reviewsList_Item"
-              >
+              <li key={id} className="reviewsList_Item">
                 <div className="authorTitle">
                   <h3 className="authorName">
                     A review by {author ? author : 'Anonymous'}
