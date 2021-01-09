@@ -10,7 +10,7 @@ export function apiTrending(page) {
       return response.json();
     }
 
-    return Promise.reject(new Error(`Хмм... Популярних фільмів не знайдено`));
+    return Promise.reject(new Error(`Популярних фільмів не знайдено`));
   });
 }
 
@@ -23,7 +23,7 @@ export function apiQuerySearching(query, page) {
       return response.json();
     }
 
-    return Promise.reject(new Error(`Хмм... По запиту фільмів не знайдено`));
+    return Promise.reject(new Error(`По ключовому слову нічого не знайдено`));
   });
 }
 
@@ -35,7 +35,7 @@ export function apiMovieDetails(movieId) {
         return response.json();
       }
 
-      return Promise.reject(new Error(`Хмм... По запиту фільмів не знайдено`));
+      return Promise.reject(new Error(`Деталей по ІД не знайдено`));
     },
   );
 }
@@ -48,7 +48,7 @@ export function apiCast(movieId) {
         return response.json();
       }
 
-      return Promise.reject(new Error(`Хмм... По запиту фільмів не знайдено`));
+      return Promise.reject(new Error(`Авторського складу по ІД не знайдено`));
     },
   );
 }
@@ -61,7 +61,7 @@ export function apiReviews(movieId) {
         return response.json();
       }
 
-      return Promise.reject(new Error(`Хмм... По запиту фільмів не знайдено`));
+      return Promise.reject(new Error(`Відгуків по ІД не знайдено`));
     },
   );
 }
