@@ -87,7 +87,7 @@ function MovieDetailsPage() {
                 <span className="movieDetails_subTitle">Genres: </span>
                 <ul className="genresList">
                   {movieDetails.genres.map(({ id, name }) => (
-                    <li key={id} name={name}>
+                    <li key={id}>
                       <i>{name} </i>
                     </li>
                   ))}

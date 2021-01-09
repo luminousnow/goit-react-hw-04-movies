@@ -59,13 +59,7 @@ function HomePage() {
         <ul className="gallery">
           {moviesCollection.map(
             ({ id, poster_path, title, vote_average, overview }) => (
-              <li
-                key={id}
-                title={title}
-                vote_average={vote_average}
-                overview={overview}
-                className="galleryItem"
-              >
+              <li key={id} className="galleryItem">
                 <Link
                   to={{
                     pathname: `movies/${id}`,
