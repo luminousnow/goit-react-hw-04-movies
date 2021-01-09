@@ -14,8 +14,6 @@ function Reviews({ movieId }) {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
 
-  // console.log(reviews);
-
   useEffect(() => {
     if (!movieId) {
       return;
@@ -38,7 +36,7 @@ function Reviews({ movieId }) {
     <div>
       {status === Status.RESOLVED &&
         reviews.results === 0 &&
-        `We don't have any reviews`}
+        `We don't have any reviews for this movie`}
 
       {status === Status.RESOLVED && reviews.results && (
         <ul className="reviewsList">
@@ -71,7 +69,7 @@ function Reviews({ movieId }) {
       )}
 
       {status === Status.PENDING && 'Searching & loading reviews...'}
-      {status === Status.REJECTED && `We don't have any reviews`}
+      {status === Status.REJECTED && `We don't have any reviews for this movie`}
     </div>
   );
 }
