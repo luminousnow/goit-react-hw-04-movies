@@ -1,33 +1,45 @@
+import { lazy, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
-import NotFoundPage from '../../Views/NotFoundPage';
-import HomePage from '../../Views/HomePage';
+import { Route, Switch } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Appbar from '../Appbar/Appbar';
-import { Route, Switch } from 'react-router-dom';
-import MoviesPage from '../../Views/MoviesPage';
-import MovieDetailsPage from '../../Views/MovieDetailsPage';
+import NotFoundPage from '../../Views/NotFoundPage';
+
+const HomePage = lazy(() =>
+  import('../../Views/HomePage.jsx' /* webpackChunkName: "home-page" */),
+);
+const MoviesPage = lazy(() =>
+  import('../../Views/MoviesPage.jsx' /* webpackChunkName: "movies-page" */),
+);
+const MovieDetailsPage = lazy(() =>
+  import(
+    '../../Views/MovieDetailsPage.jsx' /* webpackChunkName: "movie-details-page" */
+  ),
+);
 
 function App() {
   return (
     <Container>
       <Appbar />
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
+      <Suspense fallback={<h1>Загрузка маршруту</h1>}>
+        <Switch>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
 
-        <Route path="/movies" exact>
-          <MoviesPage />
-        </Route>
+          <Route path="/movies" exact>
+            <MoviesPage />
+          </Route>
 
-        <Route path="/movies/:movieId">
-          <MovieDetailsPage />
-        </Route>
+          <Route path="/movies/:movieId">
+            <MovieDetailsPage />
+          </Route>
 
-        <Route>
-          <NotFoundPage />
-        </Route>
-      </Switch>
+          <Route>
+            <NotFoundPage />
+          </Route>
+        </Switch>
+      </Suspense>
 
       <ToastContainer
         position="bottom-center"

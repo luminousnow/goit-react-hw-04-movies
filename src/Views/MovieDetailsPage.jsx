@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import {
   Link,
   useParams,
@@ -11,8 +11,13 @@ import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import Spiner from '../Components/Loader/Loader';
 import { apiMovieDetails } from '../services/api/apiMovies';
 import placeholder from '../img/film-placeholder.jpg';
-import Cast from '../Views/Cast';
-import Reviews from './Reviews';
+
+const Cast = lazy(() =>
+  import('../Views/Cast.jsx' /* webpackChunkName: "cast" */),
+);
+const Reviews = lazy(() =>
+  import('./Reviews.jsx' /* webpackChunkName: "reviews" */),
+);
 
 const Status = {
   IDLE: 'idle',
@@ -132,13 +137,17 @@ function MovieDetailsPage() {
                   </li>
                 </ul>
 
-                <Route path={`${url}/cast`}>
-                  <Cast movieId={movieId} />
-                </Route>
+                <Suspense fallback={<h1>Загрузка підмаршруту</h1>}>
+                  <Route path={`${url}/cast`}>
+                    <Cast movieId={movieId} />
+                  </Route>
+                </Suspense>
 
-                <Route path={`${url}/reviews`}>
-                  <Reviews movieId={movieId} />
-                </Route>
+                <Suspense fallback={<h1>Загрузка підмаршруту</h1>}>
+                  <Route path={`${url}/reviews`}>
+                    <Reviews movieId={movieId} />
+                  </Route>
+                </Suspense>
               </div>
             </div>
           </div>
