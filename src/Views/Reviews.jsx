@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiReviews } from '../services/api/apiMovies';
+import ShowMore from 'react-show-more';
 
 const Status = {
   IDLE: 'idle',
@@ -54,7 +55,15 @@ function Reviews({ movieId }) {
                     at {created_at ? created_at : ''}
                   </p>
                 </div>
-                <p className="authorContent">{content ? content : ''}</p>
+                <ShowMore
+                  lines={1}
+                  more="Show more"
+                  less="Show less"
+                  anchorClass="authorContent"
+                >
+                  {content ? content : ''}
+                </ShowMore>
+                {/* <p className="authorContent">{content ? content : ''}</p> */}
               </li>
             ),
           )}

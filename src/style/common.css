@@ -237,6 +237,24 @@ p.movieDetails {
 *  Стилі Cast
 */
 
+.caruselBtn {
+  margin-bottom: 10px;
+}
+
 .authorInfo {
-  /* display: flex; */
+  padding: 5px; /* Поля вокруг текста */
+  font-size: small;
+}
+
+.actorName {
+  font-size: 1rem;
+}
+
+.actorCharacter {
+  white-space: nowrap; /* Запрещаем перенос строк */
+  font-size: smaller;
+  font-style: italic;
+
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
 }
